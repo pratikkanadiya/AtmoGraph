@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  height: 100vh;
+  background: #f4f6f8;
+}
+
+.header {
+  height: 90px;
+  padding: 18px 30px;
+  background: #111827;
+  color: white;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: white;
+}
+
+.header p {
+  margin: 5px 0 0;
+  color: #cbd5e1;
+}
+
+.content {
+  display: flex;
+  height: calc(100vh - 90px);
+}
+
+.graph-container {
+  flex: 1;
+  background: white;
+}
+
+.details-panel {
+  width: 280px;
+  padding: 25px;
+  background: #ffffff;
+  border-left: 1px solid #ddd;
+}
+
+.details-panel h2 {
+  margin-top: 0;
+}
+
+.details-panel h3 {
+  font-size: 22px;
+}
+
+.custom-node {
+  min-width: 150px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 2px solid #333;
+  background: white;
+  text-align: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.node-title {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.node-type {
+  margin-top: 5px;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.custom-node.supplier {
+  border-color: #16a34a;
+}
+
+.custom-node.factory {
+  border-color: #2563eb;
+}
+
+.custom-node.port {
+  border-color: #f97316;
+}
+
+.custom-node.warehouse {
+  border-color: #9333ea;
+}
+
+.custom-node.retailer {
+  border-color: #dc2626;
+}
