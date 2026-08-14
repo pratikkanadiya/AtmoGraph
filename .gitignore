@@ -1,0 +1,14 @@
+# Ignore the root virtual environment folder
+.myenv/
+
+# Ignore the root sensitive environment variables
+.env
+
+# Do NOT ignore the example template
+!.env.example
+
+# Ignore OS and workspace configurations at the root level
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
