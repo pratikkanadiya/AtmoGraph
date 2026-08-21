@@ -16,9 +16,6 @@ driver = GraphDatabase.driver(
 
 def create_graph(tx):
 
-    # -----------------------------
-    # Countries
-    # -----------------------------
     tx.run("""
         UNWIND $countries AS country
         MERGE (c:Country {id: country.id})
@@ -31,9 +28,6 @@ def create_graph(tx):
         {"id": "JP", "name": "Japan"}
     ])
 
-    # -----------------------------
-    # Ports
-    # -----------------------------
     tx.run("""
         UNWIND $ports AS port
         MERGE (p:Port {id: port.id})
@@ -61,10 +55,7 @@ def create_graph(tx):
             "country": "CN"
         }
     ])
-
-    # -----------------------------
-    # Suppliers
-    # -----------------------------
+    
     tx.run("""
         UNWIND $suppliers AS supplier
         MERGE (s:Supplier {id: supplier.id})
@@ -88,9 +79,6 @@ def create_graph(tx):
         }
     ])
 
-    # -----------------------------
-    # Manufacturers
-    # -----------------------------
     tx.run("""
         UNWIND $manufacturers AS manufacturer
         MERGE (m:Manufacturer {id: manufacturer.id})
@@ -109,9 +97,6 @@ def create_graph(tx):
         }
     ])
 
-    # -----------------------------
-    # Warehouses
-    # -----------------------------
     tx.run("""
         UNWIND $warehouses AS warehouse
         MERGE (w:Warehouse {id: warehouse.id})
@@ -130,9 +115,6 @@ def create_graph(tx):
         }
     ])
 
-    # -----------------------------
-    # Products
-    # -----------------------------
     tx.run("""
         UNWIND $products AS product
         MERGE (p:Product {id: product.id})
@@ -152,9 +134,6 @@ def create_graph(tx):
         }
     ])
 
-    # -----------------------------
-    # Industries
-    # -----------------------------
     tx.run("""
         UNWIND $industries AS industry
         MERGE (i:Industry {id: industry.id})
@@ -174,27 +153,18 @@ def create_graph(tx):
         }
     ])
 
-    # -----------------------------
-    # Country → Port
-    # -----------------------------
     tx.run("""
         MATCH (c:Country), (p:Port)
         WHERE c.id = p.country
         MERGE (c)-[:HAS_PORT]->(p)
     """)
 
-    # -----------------------------
-    # Supplier → Country
-    # -----------------------------
     tx.run("""
         MATCH (s:Supplier), (c:Country)
         WHERE s.country = c.id
         MERGE (s)-[:LOCATED_IN]->(c)
     """)
 
-    # -----------------------------
-    # Supplier → Manufacturer
-    # -----------------------------
     tx.run("""
         MATCH (s:Supplier {id: "SUP_001"}),
               (m:Manufacturer {id: "MAN_001"})
@@ -213,9 +183,6 @@ def create_graph(tx):
         MERGE (s)-[:SUPPLIES]->(m)
     """)
 
-    # -----------------------------
-    # Manufacturer → Product
-    # -----------------------------
     tx.run("""
         MATCH (m:Manufacturer {id: "MAN_001"}),
               (p:Product {id: "PROD_003"})
@@ -228,9 +195,6 @@ def create_graph(tx):
         MERGE (m)-[:PRODUCES]->(p)
     """)
 
-    # -----------------------------
-    # Product → Industry
-    # -----------------------------
     tx.run("""
         MATCH (p:Product {id: "PROD_001"}),
               (i:Industry {id: "IND_001"})
@@ -249,9 +213,6 @@ def create_graph(tx):
         MERGE (p)-[:BELONGS_TO]->(i)
     """)
 
-    # -----------------------------
-    # Manufacturer → Warehouse
-    # -----------------------------
     tx.run("""
         MATCH (m:Manufacturer {id: "MAN_001"}),
               (w:Warehouse {id: "WH_002"})
@@ -264,9 +225,6 @@ def create_graph(tx):
         MERGE (m)-[:SHIPS_TO]->(w)
     """)
 
-    # -----------------------------
-    # Port → Port shipping routes
-    # -----------------------------
     tx.run("""
         MATCH (a:Port {id: "PORT_SHA"}),
               (b:Port {id: "PORT_ROT"})
